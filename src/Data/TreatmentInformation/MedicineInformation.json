@@ -1,0 +1,14 @@
+[
+    {
+        "startDate": "15/02/2022",
+        "endDate": "20/02/2022",
+        "name": "Vitamin C",
+        "timing":"Before a meal every day"
+    },
+    {
+        "startDate": "22/02/2022",
+        "endDate": "28/06/2022",
+        "name": "Ibuprofen",
+        "timing":"After a meal every day"
+    }
+]

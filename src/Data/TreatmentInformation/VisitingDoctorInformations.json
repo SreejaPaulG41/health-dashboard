@@ -1,0 +1,42 @@
+[
+    {
+        "visitingDate": "15/02/2022",
+        "specialist": ["Cardiologist"],
+        "colors": ["indigo-900"]
+    },
+    {
+        "visitingDate": "17/02/2022",
+        "specialist": ["Cardiologist", "Psycologist", "Therapist"],
+        "colors": ["indigo-900", "orange-400", "sky-400"]
+    },
+    {
+        "visitingDate": "18/02/2022",
+        "specialist": [ "Therapist"],
+        "colors": ["sky-400"]
+    },
+    {
+        "visitingDate": "19/02/2022",
+        "specialist": ["Psycologist"],
+        "colors": ["orange-400"]
+    },
+    {
+        "visitingDate": "20/02/2022",
+        "specialist": ["Psycologist"],
+        "colors": ["orange-400"]
+    },
+    {
+        "visitingDate": "16/03/2022 ",
+        "specialist": [ "Psycologist"],
+        "colors": ["orange-400"]
+    },
+    {
+        "visitingDate": "18/03/2022",
+        "specialist": ["Cardiologist", "Psycologist", "Therapist"],
+        "colors": ["indigo-900", "orange-400", "sky-400"]
+    },
+    {
+        "visitingDate": "20/03/2022",
+        "specialist": ["Cardiologist"],
+        "colors": ["indigo-900"]
+    }
+]

@@ -1,0 +1,18 @@
+[
+    {
+        "dept" : "All Specialists",
+        "name" : ["Clark Amber", "Adam Kelin", "Mary Bella"]
+    },
+    {
+        "dept" : "Cardiologist",
+        "name" : ["Mary Bella"]
+    },
+    {
+        "dept" : "Dantist",
+        "name" : ["Adam Kelin"]
+    },
+    {
+        "dept" : "Psycologist",
+        "name" : ["Mary Bella"]
+    }
+] 

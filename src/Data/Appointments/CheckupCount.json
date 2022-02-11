@@ -1,0 +1,26 @@
+[
+    {
+        "specialist": "Cardiologist",
+        "visitCount" : 60,
+        "fill": "#332A7C",
+        "bgColor": "indigo-900"
+    },
+    {
+        "specialist": "Dantist",
+        "visitCount": 15,
+        "fill": "#F25767",
+        "bgColor": "red-500"
+    },
+    {
+        "specialist": "Psycologist",
+        "visitCount": 41,
+        "fill": "#FFA000",
+        "bgColor": "orange-400"
+    },
+    {
+        "specialist": "Therapist",
+        "visitCount": 30,
+        "fill": "#6DBEF8",
+        "bgColor": "sky-400"
+    }
+]

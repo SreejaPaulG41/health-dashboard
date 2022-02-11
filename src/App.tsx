@@ -1,7 +1,7 @@
 import React from 'react';
-import LeftBar from './Components/LeftSIdebar/LeftBar';
-import MiddleBody from './Components/Body/MiddleBody';
-import RightBar from './Components/RightSidebar/RightBar';
+import LeftBar from './routes/dashboard/Components/LeftBar';
+import MiddleBody from './routes/dashboard/Components/MiddleBody';
+import RightBar from './routes/dashboard/Components/RightBar';
 
 const App: React.FC = () => {
   return (

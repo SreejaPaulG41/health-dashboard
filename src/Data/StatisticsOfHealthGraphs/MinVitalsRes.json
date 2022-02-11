@@ -1,0 +1,10 @@
+[
+    {
+        "vitalName": "Heart Rate",
+        "vitalValue": "114 bpm"
+    },
+    {
+        "vitalName": "Temparature",
+        "vitalValue": "36 c"
+    }
+]

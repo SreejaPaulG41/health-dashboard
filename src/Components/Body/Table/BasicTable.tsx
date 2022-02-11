@@ -1,39 +1,91 @@
-import React, { useMemo } from 'react';
-import { Data } from './Data';
+import React, { useState, useEffect } from 'react';
+import Data from '../../../Data/Appointments/AppointmentsDetails.json';
 import { COLUMNS } from './TableClm';
 import image from '../../../Images/ImageSquare.png';
 import { CheckIcon, ClockIcon, DotsHorizontalIcon, SwitchVerticalIcon, AdjustmentsIcon } from '@heroicons/react/solid';
+import TableStructure from './TableStructure';
 
-const BasicTable: React.FC = () => {
-  return <div className='border-b border-gray-500'>
+interface tableProps {
+  currentPage: number;
+  maxRow: number;
+}
+interface tableData {
+  name: string;
+  specialist: string;
+  date: string;
+  time: string;
+  status: string;
+  settings: boolean;
+}
+
+const BasicTable: React.FC<tableProps> = ({ currentPage, maxRow }) => {
+  const [tableData, setTableData] = useState<tableData[]>([]);
+  const [selectedRow, setSelectedRow] = useState<string>("");
+
+  useEffect(() => {
+    const higherValue = ((currentPage + 1) - 1) * maxRow;
+    const startValue = higherValue - maxRow;
+    const tableToShow = Data.slice(startValue, higherValue);
+    setTableData(tableToShow);
+  }, [currentPage, maxRow]);
+
+  const rowClickCheck: (e: React.MouseEvent<HTMLTableRowElement, MouseEvent>) => void = (e: React.MouseEvent<HTMLTableRowElement, MouseEvent>) => {
+    let item = e.target as Element;
+    setSelectedRow(item.id);
+    console.log(item)
+  }
+
+  const asecSort: (firstEle:string, secondEle:string)=>number = (firstEle:string, secondEle:string)=>{
+    if (firstEle < secondEle) {
+      return -1;
+    }
+    if (firstEle > secondEle) {
+      return 1;
+    }
+    return 0;
+  }
+
+  const descSort: (firstEle:string, secondEle:string)=>number = (firstEle:string, secondEle:string)=>{
+    if (firstEle > secondEle) {
+      return -1;
+    }
+    if (firstEle < secondEle) {
+      return 1;
+    }
+    return 0;
+  }
+  
+  const nameSort = () => {
+    const copyTableData = [...tableData];
+    copyTableData.sort(function (a: tableData, b: tableData): number {
+      let firstName = a.name.toLowerCase();
+      let secondName = b.name.toLowerCase();
+      return asecSort(firstName, secondName);
+    })
+    setTableData(copyTableData)
+  }
+
+  const SpecializationSort = () => {
+    const copyTableData = [...tableData];
+    copyTableData.sort(function (a: tableData, b: tableData): number {
+      let firstspecialist = a.specialist.toLowerCase();
+      let secondspecialist = b.specialist.toLowerCase();
+      return asecSort(firstspecialist, secondspecialist);
+    })
+    setTableData(copyTableData)
+  }
+
+  const dateSort = ()=>{
+    const copyTableData = [...tableData];
+    copyTableData.sort(function (a: tableData, b: tableData): number {
+      return new Date(a.date).valueOf() - new Date(b.date).valueOf();
     
-    <table className='m-5 p-5 text-indigo-900'>
-      <thead>
-        <tr>
-          {COLUMNS.map((item, index) =>
-            <th key={index} className='w-32 p-4 pl-1'>
-              {item.Header === "Settings" ? <AdjustmentsIcon className='h-6 pr-2 text-indigo-900' /> : <div className='flex'>{item.Header} <SwitchVerticalIcon className='h-6 pr-2' /></div>}
-            </th>)}
-        </tr>
-      </thead>
-      <tbody>
-        {Data.map((item, index) =>
-          <tr key={index} className={(index===1)? 'text-white bg-indigo-900': "text-indigo-900 bg-white"}>
-            <td className='w-32 p-3 h-10'>
-              <div className='flex space-x-3'>
-                <div className='rounded-lg bg-orange-400 h-8 w-8'><img src={image} alt="img" /></div>
-                <div>{item.name}</div>
-              </div>
-            </td>
-            <td className='w-32'>{item.specialist}</td>
-            <td className='w-32'>{item.date}</td>
-            <td className='w-32'>{item.time}</td>
-            <td className='w-32 text-center'>{item.status ? <CheckIcon className='h-6 pr-2 text-blue-400'/> : <ClockIcon className='h-6 pr-2 text-red-500'/>}</td>
-            <td className='w-32'>{item.settings ? <DotsHorizontalIcon className='h-6 pr-2 text-gray-400'/> : ""}</td>
-          </tr>)}
-      </tbody>
-    </table>
+    })
+    setTableData(copyTableData)
+  }
 
+  return <div className='border-b border-gray-500'>
+    <TableStructure COLUMNS={COLUMNS} tableData={tableData} nameSort={nameSort} SpecializationSort={SpecializationSort} dateSort={dateSort}/>
   </div>;
 }
 

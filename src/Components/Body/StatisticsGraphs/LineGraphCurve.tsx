@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useMemo} from "react";
 import {
   AreaChart,
   Area,
@@ -9,44 +9,20 @@ import {
   ResponsiveContainer
 } from "recharts";
 
-const data = [
-  {
-    dayName:"",
-    score: 0,
-  },
-  {
-    dayName: "Mon",
-    score: 6,
-  },
-  {
-    dayName: "Tue",
-    score: 3,
-  },
-  {
-    dayName: "Wed",
-    score: 18,
-  },
-  {
-    dayName: "Thu",
-    score: 12,
-  },
-  {
-    dayName: "Fri",
-    score: 14,
-  },
-  {
-    dayName: "Sat",
-    score: 5,
-  },
-  {
-    dayName: "Sun",
-    score: 0,
-  }
-];
+type curveType = {
+  name: string;
+  score: number;
+}
 
-const GraphCurve : React.FC = () => {
+type reportType = {
+  data : curveType[] ;
+}
+
+const LineGraphCurve : React.FC<reportType> = ({data}) => {
+  let xAxisParamName = (data.length > 0) ? Object.keys(data[0])[0] : "";
   return (
     <div>
+      {(data.length > 0) ?
       <ResponsiveContainer width="100%" aspect={3}>
         <AreaChart
           width={500}
@@ -60,13 +36,14 @@ const GraphCurve : React.FC = () => {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" vertical={false}/>
-          <XAxis dataKey="dayName" />
+          <XAxis dataKey={xAxisParamName} />
           <YAxis />
           <Tooltip/>
           <Area type="monotone" dataKey="score" stroke="#FFA000" fill="#ffedd5" />
         </AreaChart>
       </ResponsiveContainer>
+      :""}
     </div>
   );
 }
-export default GraphCurve;
+export default LineGraphCurve;

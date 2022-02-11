@@ -1,0 +1,18 @@
+[
+    {
+        "vitalName": "Blood",
+        "vitalValue": "A+"
+    },
+    {
+        "vitalName": "Pressure",
+        "vitalValue": "120/80"
+    },
+    {
+        "vitalName": "Height", 
+        "vitalValue": "158cm"
+    },
+    {
+        "vitalName": "Weight",
+        "vitalValue": "48.0Kg"
+    }
+]
