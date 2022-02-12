@@ -10,7 +10,7 @@ interface mediDayType {
   endDate: string;
 }
 
-interface med{
+interface med {
   startDate: string;
   endDate: string;
   name: string;
@@ -18,37 +18,27 @@ interface med{
 }
 const MedicineList: React.FC<mediDayType> = ({ startDate, endDate }) => {
   const [medicines, setMedicines] = useState<med[]>([]);
-  const medName: string[] = ["Vitamin C", "Ibuprofen"];
-  const medTime: string[] = ["Before a meal every day", "After a meal every day"];
   const medImages: string[] = [vitc, capcule];
 
   useEffect(() => {
-    const res = mediData.filter((item)=>{
-      return dateCheck(startDate, endDate, item.startDate) && dateCheck(startDate, endDate, item.endDate); 
+    const res = mediData.filter((item) => {
+      return (dateCheck(startDate, item.startDate, item.endDate, "start") || dateCheck(endDate, item.startDate, item.endDate, "end"));
     })
     setMedicines(res);
   }, [startDate, endDate])
 
-  function dateCheck(from:string, to:string, check:string) {
-    var d1 = from.split('/');
-    var d2 = to.split('/');
-    var d3 = check.split('/');
+  function dateCheck(dateCheck: string, dateFrom: string, dateTo: string, type: string) {
+    let d1 = dateFrom.split("/");
+    let d2 = dateTo.split("/");
+    let c = dateCheck.split("/");
 
-    if(d3[2]>=d1[2] && d3[2]<=d2[2]){
-      if(d3[1]>=d1[1] && d3[1]<=d2[1]){
-        if(d3[0]>=d1[0] && d3[0]<=d2[0]){
-          return true;
-        }else{
-          return false;
-        }
-      }else{
-        return false;
-      }
-    }else{
-      return false;
-    }
+    let from = new Date(parseInt(d1[2]), parseInt(d1[1]) - 1, parseInt(d1[0])); 
+    let to = new Date(parseInt(d2[2]), parseInt(d2[1]) - 1, parseInt(d2[0]));
+    let check = new Date(parseInt(c[2]), parseInt(c[1]) - 1, parseInt(c[0]));
+
+    return (check>=from && check<=to);
   }
-  
+
   return <div className='p-5 pt-0 '>
     {
       medicines.map((item, index) => <SingleMedicine key={index} name={item.name} time={item.timing} image={medImages[index]} />)
